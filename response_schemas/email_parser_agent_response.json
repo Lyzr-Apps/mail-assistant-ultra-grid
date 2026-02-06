@@ -1,0 +1,47 @@
+{
+  "agent_name": "Email Parser Agent",
+  "agent_id": "6985ee3400fd63c3f13fa98a",
+  "agent_purpose": "email_parser",
+  "description": "Scans Gmail for emails containing delegation keywords and extracts task information with assignees",
+  "response_schema": {
+    "status": "string (success|error)",
+    "result": {
+      "response": "string",
+      "action_taken": "string (optional)",
+      "data": "object (optional, any structured data)",
+      "suggestions": [
+        "string (optional)"
+      ]
+    },
+    "metadata": {
+      "agent_name": "string",
+      "timestamp": "string (ISO)"
+    }
+  },
+  "example_response": {
+    "status": "success",
+    "result": {
+      "response": "I've completed the task you requested",
+      "action_taken": "Processed the input and generated output",
+      "data": {
+        "key": "value"
+      },
+      "suggestions": [
+        "You might also want to try X"
+      ]
+    },
+    "metadata": {
+      "agent_name": "Email Parser Agent",
+      "timestamp": "2025-01-15T10:30:00Z"
+    }
+  },
+  "is_actual_tested": false,
+  "test_timestamp": "2026-02-06T13:38:50.496559",
+  "test_message_used": "Hello, provide a sample response",
+  "raw_test_response": "To respond effectively to your request, I need clarification on the context for the \"sample response\" you're asking about. Could you please specify the type of sample response you need, such as a specific task or scenario related to email analysis, artifact management, or any other area you're interested in? This will help me create a relevant and useful example for you.",
+  "test_error": "Response not valid JSON: Expecting value: line 1 column 1 (char 0)",
+  "actual_test_response": {
+    "raw_text": "litellm.ContextWindowExceededError: litellm.BadRequestError: ContextWindowExceededError: OpenAIException - This model's maximum context length is 128000 tokens. However, your messages resulted in 304912 tokens (303593 in the messages, 1319 in the functions). Please reduce the length of the messages or functions."
+  },
+  "test_passed": false
+}

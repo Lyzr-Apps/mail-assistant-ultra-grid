@@ -1,0 +1,37 @@
+{
+  "agent_name": "Task Structurer Agent",
+  "agent_id": "6985ee47276124fcff3c3376",
+  "test_message": "Structure these tasks: Email 1: 'Urgent - @John please review the API documentation', Email 2: 'Team task for @Sarah - update the user dashboard with new metrics'",
+  "expected_purpose": "task_structurer",
+  "timestamp": "2026-02-06T13:39:00.366662",
+  "is_valid_json": true,
+  "validation_errors": [],
+  "actual_response": {
+    "status": "success",
+    "result": {
+      "tasks": [
+        {
+          "title": "Review the API documentation",
+          "description": "John, please review the API documentation as it is marked urgent.",
+          "priority": "urgent",
+          "assignee": "John",
+          "context": "Urgent task from email: 'Urgent - @John please review the API documentation'",
+          "source_email": "Email 1"
+        },
+        {
+          "title": "Update user dashboard with new metrics",
+          "description": "Sarah, update the user dashboard with new metrics as a team task.",
+          "priority": "high",
+          "assignee": "Sarah",
+          "context": "Task from email: 'Team task for @Sarah - update the user dashboard with new metrics'",
+          "source_email": "Email 2"
+        }
+      ]
+    },
+    "metadata": {
+      "agent_name": "Task Structurer Agent",
+      "timestamp": "2023-10-02T12:00:00Z"
+    }
+  },
+  "raw_response": "{\n  \"status\": \"success\",\n  \"result\": {\n    \"tasks\": [\n      {\n        \"title\": \"Review the API documentation\",\n        \"description\": \"John, please review the API documentation as it is marked urgent.\",\n        \"priority\": \"urgent\",\n        \"assignee\": \"John\",\n        \"context\": \"Urgent task from email: 'Urgent - @John please review the API documentation'\",\n        \"source_email\": \"Email 1\"\n      },\n      {\n        \"title\": \"Update user dashboard with new metrics\",\n        \"description\": \"Sarah, update the user dashboard with new metrics as a team task.\",\n        \"priority\": \"high\",\n        \"assignee\": \"Sarah\",\n        \"context\": \"Task from email: 'Team task for @Sarah - update the user dashboard with new metrics'\",\n        \"source_email\": \"Email 2\"\n      }\n    ]\n  },\n  \"metadata\": {\n    \"agent_name\": \"Task Structurer Agent\",\n    \"timestamp\": \"2023-10-02T12:00:00Z\"\n  }\n}"
+}

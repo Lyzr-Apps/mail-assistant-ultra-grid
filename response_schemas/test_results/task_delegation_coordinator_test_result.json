@@ -1,0 +1,15 @@
+{
+  "agent_name": "Task Delegation Coordinator",
+  "agent_id": "6985ee82dea12af725a8940a",
+  "test_message": "Process delegations from my recent emails about the website redesign project and mobile app bug fixes",
+  "expected_purpose": "manager",
+  "timestamp": "2026-02-06T13:38:43.204478",
+  "is_valid_json": false,
+  "validation_errors": [
+    "Response is not valid JSON: Expecting value: line 1 column 1 (char 0)"
+  ],
+  "actual_response": {
+    "raw_text": "It seems that there were no recent emails found related to the website redesign or mobile app bug fixes projects in the inbox. Could you please verify if such emails exist or if there is any specific detail to refine the search further?"
+  },
+  "raw_response": "It seems that there were no recent emails found related to the website redesign or mobile app bug fixes projects in the inbox. Could you please verify if such emails exist or if there is any specific detail to refine the search further?"
+}

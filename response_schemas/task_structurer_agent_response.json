@@ -1,0 +1,83 @@
+{
+  "agent_name": "Task Structurer Agent",
+  "agent_id": "6985ee47276124fcff3c3376",
+  "agent_purpose": "task_structurer",
+  "description": "Structures extracted email information into organized task format with clear details and assignee information",
+  "response_schema": {
+    "status": "string",
+    "result": {
+      "tasks": [
+        {
+          "title": "string",
+          "description": "string",
+          "priority": "string",
+          "assignee": "string",
+          "context": "string",
+          "source_email": "string"
+        }
+      ]
+    },
+    "metadata": {
+      "agent_name": "string",
+      "timestamp": "string"
+    }
+  },
+  "example_response": {
+    "status": "success",
+    "result": {
+      "tasks": [
+        {
+          "title": "Review the API documentation",
+          "description": "John, please review the API documentation as it is marked urgent.",
+          "priority": "urgent",
+          "assignee": "John",
+          "context": "Urgent task from email: 'Urgent - @John please review the API documentation'",
+          "source_email": "Email 1"
+        },
+        {
+          "title": "Update user dashboard with new metrics",
+          "description": "Sarah, update the user dashboard with new metrics as a team task.",
+          "priority": "high",
+          "assignee": "Sarah",
+          "context": "Task from email: 'Team task for @Sarah - update the user dashboard with new metrics'",
+          "source_email": "Email 2"
+        }
+      ]
+    },
+    "metadata": {
+      "agent_name": "Task Structurer Agent",
+      "timestamp": "2023-10-02T12:00:00Z"
+    }
+  },
+  "is_actual_tested": true,
+  "test_timestamp": "2026-02-06T13:39:00.367145",
+  "test_message_used": "Hello, provide a sample response",
+  "actual_test_response": {
+    "status": "success",
+    "result": {
+      "tasks": [
+        {
+          "title": "Review the API documentation",
+          "description": "John, please review the API documentation as it is marked urgent.",
+          "priority": "urgent",
+          "assignee": "John",
+          "context": "Urgent task from email: 'Urgent - @John please review the API documentation'",
+          "source_email": "Email 1"
+        },
+        {
+          "title": "Update user dashboard with new metrics",
+          "description": "Sarah, update the user dashboard with new metrics as a team task.",
+          "priority": "high",
+          "assignee": "Sarah",
+          "context": "Task from email: 'Team task for @Sarah - update the user dashboard with new metrics'",
+          "source_email": "Email 2"
+        }
+      ]
+    },
+    "metadata": {
+      "agent_name": "Task Structurer Agent",
+      "timestamp": "2023-10-02T12:00:00Z"
+    }
+  },
+  "test_passed": true
+}

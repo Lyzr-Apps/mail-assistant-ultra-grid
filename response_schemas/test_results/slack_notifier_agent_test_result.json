@@ -1,0 +1,15 @@
+{
+  "agent_name": "Slack Notifier Agent",
+  "agent_id": "6985ee5c00fd63c3f13fa992",
+  "test_message": "Send Slack notification to @john.smith about: 'Review API Documentation - HIGH priority. Please review the REST API docs by EOD Friday. Context: New endpoints added for user management.'",
+  "expected_purpose": "slack_notifier",
+  "timestamp": "2026-02-06T13:39:20.977683",
+  "is_valid_json": false,
+  "validation_errors": [
+    "Response is not valid JSON: Expecting value: line 1 column 1 (char 0)"
+  ],
+  "actual_response": {
+    "raw_text": "```json\n{\n  \"status\": \"error\",\n  \"result\": {\n    \"notifications\": [\n      {\n        \"assignee\": \"John Smith\",\n        \"slack_handle\": \"@john.smith\",\n        \"message_sent\": \"Review API Documentation\\n\\n**Priority**: HIGH \u26a0\ufe0f\\n\\n**Description**: Please review the REST API docs by EOD Friday.\\n\\n**Context**: New endpoints added for user management.\\n\\nPlease ensure thorough understanding and feedback on possible improvements.\\n\\nThank you!\",\n        \"status\": \"failed\",\n        \"timestamp\": \"2023-11-29T09:25:47Z\"\n      }\n    ]\n  },\n  \"metadata\": {\n    \"agent_name\": \"Slack Notifier Agent\",\n    \"timestamp\": \"2023-11-29T09:25:47Z\"\n  }\n}\n```\n\nThe Slack notification to @john.smith for the task \"Review API Documentation\" failed due to an invalid argument error. I will investigate the issue for a resolution."
+  },
+  "raw_response": "```json\n{\n  \"status\": \"error\",\n  \"result\": {\n    \"notifications\": [\n      {\n        \"assignee\": \"John Smith\",\n        \"slack_handle\": \"@john.smith\",\n        \"message_sent\": \"Review API Documentation\\n\\n**Priority**: HIGH \u26a0\ufe0f\\n\\n**Description**: Please review the REST API docs by EOD Friday.\\n\\n**Context**: New endpoints added for user management.\\n\\nPlease ensure thorough understanding and feedback on possible improvements.\\n\\nThank you!\",\n        \"status\": \"failed\",\n        \"timestamp\": \"2023-11-29T09:25:47Z\"\n      }\n    ]\n  },\n  \"metadata\": {\n    \"agent_name\": \"Slack Notifier Agent\",\n    \"timestamp\": \"2023-11-29T09:25:47Z\"\n  }\n}\n```\n\nThe Slack notification to @john.smith for the task \"Review API Documentation\" failed due to an invalid argument error. I will investigate the issue for a resolution."
+}

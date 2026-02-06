@@ -1,0 +1,56 @@
+{
+  "agent_name": "Slack Notifier Agent",
+  "agent_id": "6985ee5c00fd63c3f13fa992",
+  "agent_purpose": "slack_notifier",
+  "description": "Composes and sends personalized Slack messages to task assignees with complete task details and context",
+  "response_schema": {
+    "status": "string",
+    "result": {
+      "notifications": [
+        {
+          "assignee": "string",
+          "slack_handle": "string",
+          "message_sent": "string",
+          "status": "string",
+          "timestamp": "string"
+        }
+      ]
+    },
+    "metadata": {
+      "agent_name": "string",
+      "timestamp": "string"
+    }
+  },
+  "example_response": {
+    "status": "success",
+    "result": {
+      "notifications": [
+        {
+          "assignee": "Jane Doe",
+          "slack_handle": "@jane",
+          "message_sent": "Task: Update Marketing Plan\nDescription: Revise the Q4 marketing plan document to include the latest competitive analysis.\nPriority: **High**\nContext: This update is crucial for aligning marketing strategies with current market trends.\nPlease complete this by end of the week.\nSource: Project Management System",
+          "status": "sent",
+          "timestamp": "2023-11-02T15:04:05Z"
+        },
+        {
+          "assignee": "John Smith",
+          "slack_handle": "@john",
+          "message_sent": "Task: Bug Fix - Login Issue\nDescription: Address the login bug that prevents users from accessing their accounts.\nPriority: ***Urgent***\nContext: This issue has been reported by several users and affects customer satisfaction.\nPlease prioritize this fix.\nSource: Bug Tracking System",
+          "status": "sent",
+          "timestamp": "2023-11-02T15:04:05Z"
+        }
+      ]
+    },
+    "metadata": {
+      "agent_name": "Slack Notifier Agent",
+      "timestamp": "2023-11-02T15:04:05Z"
+    }
+  },
+  "is_actual_tested": true,
+  "test_timestamp": "2026-02-06T13:39:20.978439",
+  "test_message_used": "Hello, provide a sample response",
+  "actual_test_response": {
+    "raw_text": "```json\n{\n  \"status\": \"error\",\n  \"result\": {\n    \"notifications\": [\n      {\n        \"assignee\": \"John Smith\",\n        \"slack_handle\": \"@john.smith\",\n        \"message_sent\": \"Review API Documentation\\n\\n**Priority**: HIGH \u26a0\ufe0f\\n\\n**Description**: Please review the REST API docs by EOD Friday.\\n\\n**Context**: New endpoints added for user management.\\n\\nPlease ensure thorough understanding and feedback on possible improvements.\\n\\nThank you!\",\n        \"status\": \"failed\",\n        \"timestamp\": \"2023-11-29T09:25:47Z\"\n      }\n    ]\n  },\n  \"metadata\": {\n    \"agent_name\": \"Slack Notifier Agent\",\n    \"timestamp\": \"2023-11-29T09:25:47Z\"\n  }\n}\n```\n\nThe Slack notification to @john.smith for the task \"Review API Documentation\" failed due to an invalid argument error. I will investigate the issue for a resolution."
+  },
+  "test_passed": false
+}

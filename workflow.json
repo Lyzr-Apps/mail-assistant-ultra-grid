@@ -1,0 +1,70 @@
+{
+  "nodes": [
+    {
+      "id": "input_node",
+      "type": "Input",
+      "label": "User Input - Process Delegations",
+      "nodeCategory": "input"
+    },
+    {
+      "id": "task_delegation_coordinator",
+      "type": "Agent",
+      "label": "Task Delegation Coordinator",
+      "nodeCategory": "agent"
+    },
+    {
+      "id": "email_parser_agent",
+      "type": "Agent",
+      "label": "Email Parser Agent",
+      "nodeCategory": "agent"
+    },
+    {
+      "id": "task_structurer_agent",
+      "type": "Agent",
+      "label": "Task Structurer Agent",
+      "nodeCategory": "agent"
+    },
+    {
+      "id": "slack_notifier_agent",
+      "type": "Agent",
+      "label": "Slack Notifier Agent",
+      "nodeCategory": "agent"
+    },
+    {
+      "id": "output_node",
+      "type": "Output",
+      "label": "Delegation Complete",
+      "nodeCategory": "end"
+    }
+  ],
+  "edges": [
+    {
+      "source": "input_node",
+      "target": "task_delegation_coordinator"
+    },
+    {
+      "source": "task_delegation_coordinator",
+      "target": "email_parser_agent"
+    },
+    {
+      "source": "task_delegation_coordinator",
+      "target": "task_structurer_agent"
+    },
+    {
+      "source": "task_delegation_coordinator",
+      "target": "slack_notifier_agent"
+    },
+    {
+      "source": "email_parser_agent",
+      "target": "output_node"
+    },
+    {
+      "source": "task_structurer_agent",
+      "target": "output_node"
+    },
+    {
+      "source": "slack_notifier_agent",
+      "target": "output_node"
+    }
+  ]
+}

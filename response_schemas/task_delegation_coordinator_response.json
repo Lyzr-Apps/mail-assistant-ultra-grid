@@ -1,0 +1,69 @@
+{
+  "agent_name": "Task Delegation Coordinator",
+  "agent_id": "6985ee82dea12af725a8940a",
+  "agent_purpose": "task_delegation_manager",
+  "description": "Orchestrates the complete task delegation workflow from email parsing to Slack notifications",
+  "response_schema": {
+    "status": "string",
+    "result": {
+      "workflow_summary": {
+        "emails_processed": "string",
+        "tasks_created": "string",
+        "notifications_sent": "string"
+      },
+      "email_parsing": {
+        "status": "string",
+        "emails_found": "string"
+      },
+      "task_structuring": {
+        "status": "string",
+        "tasks_structured": "string"
+      },
+      "slack_notifications": {
+        "status": "string",
+        "notifications_sent": "string"
+      },
+      "errors": [
+        "any"
+      ]
+    },
+    "metadata": {
+      "agent_name": "string",
+      "timestamp": "string"
+    }
+  },
+  "example_response": {
+    "status": "success",
+    "result": {
+      "workflow_summary": {
+        "emails_processed": "5",
+        "tasks_created": "4",
+        "notifications_sent": "4"
+      },
+      "email_parsing": {
+        "status": "completed",
+        "emails_found": "5"
+      },
+      "task_structuring": {
+        "status": "completed",
+        "tasks_structured": "4"
+      },
+      "slack_notifications": {
+        "status": "completed",
+        "notifications_sent": "4"
+      },
+      "errors": []
+    },
+    "metadata": {
+      "agent_name": "Task Delegation Coordinator",
+      "timestamp": "2023-10-07T12:34:56Z"
+    }
+  },
+  "is_actual_tested": true,
+  "test_timestamp": "2026-02-06T13:38:43.205005",
+  "test_message_used": "Hello, provide a sample response",
+  "actual_test_response": {
+    "raw_text": "It seems that there were no recent emails found related to the website redesign or mobile app bug fixes projects in the inbox. Could you please verify if such emails exist or if there is any specific detail to refine the search further?"
+  },
+  "test_passed": false
+}

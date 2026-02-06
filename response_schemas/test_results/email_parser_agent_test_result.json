@@ -1,0 +1,15 @@
+{
+  "agent_name": "Email Parser Agent",
+  "agent_id": "6985ee3400fd63c3f13fa98a",
+  "test_message": "Fetch recent emails with keywords: urgent, team, delegate. Look for emails about project assignments and task mentions.",
+  "expected_purpose": "email_parser",
+  "timestamp": "2026-02-06T13:38:50.495708",
+  "is_valid_json": false,
+  "validation_errors": [
+    "Response is not valid JSON: Expecting value: line 1 column 1 (char 0)"
+  ],
+  "actual_response": {
+    "raw_text": "litellm.ContextWindowExceededError: litellm.BadRequestError: ContextWindowExceededError: OpenAIException - This model's maximum context length is 128000 tokens. However, your messages resulted in 304912 tokens (303593 in the messages, 1319 in the functions). Please reduce the length of the messages or functions."
+  },
+  "raw_response": "litellm.ContextWindowExceededError: litellm.BadRequestError: ContextWindowExceededError: OpenAIException - This model's maximum context length is 128000 tokens. However, your messages resulted in 304912 tokens (303593 in the messages, 1319 in the functions). Please reduce the length of the messages or functions."
+}

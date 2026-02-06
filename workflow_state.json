@@ -1,0 +1,46 @@
+{
+  "workflow_name": "Task Delegation Agent System",
+  "created_at": "2026-02-06T00:00:00.000Z",
+  "agents": {
+    "manager": {
+      "agent_id": "6985ee82dea12af725a8940a",
+      "name": "Task Delegation Coordinator",
+      "type": "manager",
+      "description": "Orchestrates the delegation workflow by routing email data to parsing, coordinating task creation, and ensuring Slack notifications are sent with complete context"
+    },
+    "sub_agents": [
+      {
+        "agent_id": "6985ee3400fd63c3f13fa98a",
+        "name": "Email Parser Agent",
+        "type": "sub_agent",
+        "description": "Scans Gmail for emails containing delegation keywords (urgent, team, delegate), extracts task title, description, priority level, context, and identifies teammate mentions (@name, for name)",
+        "tools": ["Gmail - GMAIL_FETCH_EMAILS"]
+      },
+      {
+        "agent_id": "6985ee47276124fcff3c3376",
+        "name": "Task Structurer Agent",
+        "type": "sub_agent",
+        "description": "Structures extracted information into organized task format with clear title, description, priority classification, and assignee details",
+        "tools": []
+      },
+      {
+        "agent_id": "6985ee5c00fd63c3f13fa992",
+        "name": "Slack Notifier Agent",
+        "type": "sub_agent",
+        "description": "Composes and sends personalized Slack messages to identified teammates with task title, description, priority, and context information",
+        "tools": ["Slack - SLACK_SENDS_A_MESSAGE_TO_A_SLACK_CHANNEL"]
+      }
+    ]
+  },
+  "workflow_structure": {
+    "nodes": 6,
+    "edges": 7,
+    "pattern": "manager-subagent"
+  },
+  "response_schemas": [
+    "email_parser_agent_response.json",
+    "task_structurer_agent_response.json",
+    "slack_notifier_agent_response.json",
+    "task_delegation_coordinator_response.json"
+  ]
+}
