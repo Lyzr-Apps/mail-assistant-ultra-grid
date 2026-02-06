@@ -49,13 +49,13 @@ export default function Home() {
   }, [settings])
 
   const processDelegations = async () => {
-    setIsProcessing(true)
-    setError(null)
-    setCurrentTasks([])
+    setIsProcessing(true);
+    setError(null);
+    setCurrentTasks([]);
 
     try {
       // Call the Manager Agent (Task Delegation Coordinator)
-      const message = `Process delegations from recent emails. Keywords: ${settings.keywords.join(', ')}`
+      const message = `Process delegations from recent emails. Keywords: ${settings.keywords.join(', ')}`;
 
       const response = await fetch('/api/process-delegations', {
         method: 'POST',
@@ -65,16 +65,16 @@ export default function Home() {
           user_id: 'dashboard_user',
           session_id: `delegation_${Date.now()}`,
         }),
-      })
+      });
 
-      const data = await response.json()
+      const data = await response.json();
 
       if (!data.success) {
-        throw new Error(data.error || 'Failed to process delegations')
+        throw new Error(data.error || 'Failed to process delegations');
       }
 
       // Parse the response based on actual structure
-      let tasks: DelegatedTask[] = []
+      let tasks: DelegatedTask[] = [];
 
       // Check if response contains tasks (from Task Structurer Agent)
       if (data.response?.result?.tasks && Array.isArray(data.response.result.tasks)) {
@@ -83,7 +83,7 @@ export default function Home() {
           id: `task_${Date.now()}_${index}`,
           delegatedAt: new Date().toISOString(),
           notification: undefined, // Will be populated by Slack Notifier
-        }))
+        }));
       } else if (data.response?.result?.notifications) {
         // If we received notifications instead, create tasks from them
         tasks = data.response.result.notifications.map((notif: any, index: number) => ({
@@ -96,14 +96,14 @@ export default function Home() {
           source_email: 'Email',
           delegatedAt: notif.timestamp,
           notification: notif,
-        }))
+        }));
       } else {
         // Handle text-only response
-        const message = data.response?.result?.message || data.raw_response || 'No tasks found'
-        throw new Error(message)
+        const message = data.response?.result?.message || data.raw_response || 'No tasks found';
+        throw new Error(message);
       }
 
-      setCurrentTasks(tasks)
+      setCurrentTasks(tasks);
 
       // Add to history
       if (tasks.length > 0) {
@@ -111,76 +111,76 @@ export default function Home() {
           id: `history_${Date.now()}`,
           date: new Date().toISOString(),
           tasks,
-        }
-        setHistory((prev) => [newHistoryEntry, ...prev.slice(0, 9)]) // Keep last 10
+        };
+        setHistory((prev) => [newHistoryEntry, ...prev.slice(0, 9)]); // Keep last 10
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred')
+      setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
-      setIsProcessing(false)
+      setIsProcessing(false);
     }
-  }
+  };
 
   const toggleTaskExpanded = (taskId: string) => {
     setExpandedTasks((prev) => {
-      const newSet = new Set(prev)
+      const newSet = new Set(prev);
       if (newSet.has(taskId)) {
-        newSet.delete(taskId)
+        newSet.delete(taskId);
       } else {
-        newSet.add(taskId)
+        newSet.add(taskId);
       }
-      return newSet
-    })
-  }
+      return newSet;
+    });
+  };
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
       case 'urgent':
-        return 'bg-red-500 hover:bg-red-600'
+        return 'bg-red-500 hover:bg-red-600';
       case 'high':
-        return 'bg-orange-500 hover:bg-orange-600'
+        return 'bg-orange-500 hover:bg-orange-600';
       case 'medium':
-        return 'bg-blue-500 hover:bg-blue-600'
+        return 'bg-blue-500 hover:bg-blue-600';
       case 'low':
-        return 'bg-gray-500 hover:bg-gray-600'
+        return 'bg-gray-500 hover:bg-gray-600';
       default:
-        return 'bg-gray-500 hover:bg-gray-600'
+        return 'bg-gray-500 hover:bg-gray-600';
     }
-  }
+  };
 
   const addKeyword = () => {
     if (newKeyword.trim() && !settings.keywords.includes(newKeyword.trim())) {
       setSettings((prev) => ({
         ...prev,
         keywords: [...prev.keywords, newKeyword.trim()],
-      }))
-      setNewKeyword('')
+      }));
+      setNewKeyword('');
     }
-  }
+  };
 
   const removeKeyword = (keyword: string) => {
     setSettings((prev) => ({
       ...prev,
       keywords: prev.keywords.filter((k) => k !== keyword),
-    }))
-  }
+    }));
+  };
 
   const addTeammate = () => {
     if (newTeammate.name.trim() && newTeammate.slackHandle.trim()) {
       setSettings((prev) => ({
         ...prev,
         teammateMapping: [...prev.teammateMapping, { ...newTeammate }],
-      }))
-      setNewTeammate({ name: '', slackHandle: '' })
+      }));
+      setNewTeammate({ name: '', slackHandle: '' });
     }
-  }
+  };
 
   const removeTeammate = (index: number) => {
     setSettings((prev) => ({
       ...prev,
       teammateMapping: prev.teammateMapping.filter((_, i) => i !== index),
     }))
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
