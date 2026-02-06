@@ -518,7 +518,6 @@ export default function Home() {
                 </table>
               </div>
             </div>
-              </div>
 
             <div className="border-t border-slate-200 px-6 py-4 flex justify-end sticky bottom-0 bg-white">
               <button
