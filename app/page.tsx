@@ -2,14 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { FaGmail, FaSlack, FaCheckCircle, FaTimesCircle, FaSpinner, FaCog, FaTimes, FaPlus, FaTrash, FaChevronDown, FaChevronUp } from 'react-icons/fa'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Badge } from '@/components/ui/badge'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog'
-import { Label } from '@/components/ui/label'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { Alert, AlertDescription } from '@/components/ui/alert'
 import type { DelegatedTask, DelegationHistory, DelegationSettings, TeammateMapping } from '@/types/delegation'
 
 export default function Home() {
@@ -219,10 +211,13 @@ export default function Home() {
                   <span className="text-sm text-slate-600">Slack</span>
                 </div>
               </div>
-              <Button variant="outline" size="sm" onClick={() => setShowSettings(true)}>
-                <FaCog className="mr-2" />
+              <button
+                onClick={() => setShowSettings(true)}
+                className="flex items-center gap-2 px-4 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-100 transition-colors"
+              >
+                <FaCog />
                 Settings
-              </Button>
+              </button>
             </div>
           </div>
         </div>
@@ -234,49 +229,48 @@ export default function Home() {
           {/* Processing Panel - 70% width */}
           <div className="lg:col-span-2 space-y-6">
             {/* Keywords Display */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Active Keywords</CardTitle>
-              </CardHeader>
-              <CardContent>
+            <div className="bg-white border border-slate-200 rounded-lg shadow-sm">
+              <div className="border-b border-slate-200 px-6 py-4">
+                <h3 className="text-lg font-semibold text-slate-800">Active Keywords</h3>
+              </div>
+              <div className="px-6 py-4">
                 <div className="flex flex-wrap gap-2">
                   {settings.keywords.map((keyword) => (
-                    <Badge key={keyword} variant="secondary" className="px-3 py-1">
+                    <span key={keyword} className="px-3 py-1 bg-slate-100 text-slate-700 rounded-md text-sm font-medium">
                       {keyword}
-                    </Badge>
+                    </span>
                   ))}
                 </div>
                 <p className="text-sm text-slate-500 mt-3">
                   Monitoring emails for these keywords to identify delegation tasks
                 </p>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
 
             {/* Process Button */}
             <div className="flex justify-center">
-              <Button
+              <button
                 onClick={processDelegations}
                 disabled={isProcessing}
-                size="lg"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 text-lg font-semibold"
+                className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors shadow-md"
               >
                 {isProcessing ? (
                   <>
-                    <FaSpinner className="mr-2 animate-spin" />
+                    <FaSpinner className="animate-spin" />
                     Processing Delegations...
                   </>
                 ) : (
                   'Process Delegations'
                 )}
-              </Button>
+              </button>
             </div>
 
             {/* Error Display */}
             {error && (
-              <Alert variant="destructive">
-                <FaTimesCircle className="h-4 w-4" />
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
+              <div className="flex items-start gap-3 bg-red-50 border border-red-200 rounded-lg p-4">
+                <FaTimesCircle className="text-red-500 mt-0.5" size={16} />
+                <p className="text-sm text-red-700">{error}</p>
+              </div>
             )}
 
             {/* Results Area */}
@@ -284,8 +278,8 @@ export default function Home() {
               <div className="space-y-4">
                 <h2 className="text-xl font-semibold text-slate-800">Delegated Tasks</h2>
                 {currentTasks.map((task) => (
-                  <Card key={task.id} className="border-l-4 border-l-blue-500">
-                    <CardContent className="pt-6">
+                  <div key={task.id} className="bg-white border border-slate-200 border-l-4 border-l-blue-500 rounded-lg shadow-sm">
+                    <div className="p-6">
                       <div className="space-y-3">
                         {/* Task Header */}
                         <div className="flex items-start justify-between">
@@ -293,20 +287,19 @@ export default function Home() {
                             <h3 className="font-semibold text-lg text-slate-800">{task.title}</h3>
                             <p className="text-sm text-slate-600 mt-1">{task.description}</p>
                           </div>
-                          <Button
-                            variant="ghost"
-                            size="sm"
+                          <button
                             onClick={() => toggleTaskExpanded(task.id)}
+                            className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
                           >
-                            {expandedTasks.has(task.id) ? <FaChevronUp /> : <FaChevronDown />}
-                          </Button>
+                            {expandedTasks.has(task.id) ? <FaChevronUp className="text-slate-600" /> : <FaChevronDown className="text-slate-600" />}
+                          </button>
                         </div>
 
                         {/* Task Meta */}
                         <div className="flex items-center gap-4 flex-wrap">
-                          <Badge className={`${getPriorityColor(task.priority)} text-white`}>
+                          <span className={`${getPriorityColor(task.priority)} text-white px-3 py-1 rounded-md text-xs font-semibold`}>
                             {task.priority.toUpperCase()}
-                          </Badge>
+                          </span>
                           <div className="flex items-center gap-2">
                             <div className="w-8 h-8 rounded-full bg-slate-700 text-white flex items-center justify-center text-sm font-semibold">
                               {task.assignee.charAt(0).toUpperCase()}
@@ -352,8 +345,8 @@ export default function Home() {
                           </div>
                         )}
                       </div>
-                    </CardContent>
-                  </Card>
+                    </div>
+                  </div>
                 ))}
               </div>
             )}
@@ -361,12 +354,12 @@ export default function Home() {
 
           {/* History Sidebar - 30% width */}
           <div className="lg:col-span-1">
-            <Card className="sticky top-4">
-              <CardHeader>
-                <CardTitle className="text-lg">Delegation History</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ScrollArea className="h-[600px] pr-4">
+            <div className="bg-white border border-slate-200 rounded-lg shadow-sm sticky top-4">
+              <div className="border-b border-slate-200 px-6 py-4">
+                <h3 className="text-lg font-semibold text-slate-800">Delegation History</h3>
+              </div>
+              <div className="px-6 py-4">
+                <div className="h-[600px] overflow-y-auto pr-2">
                   {history.length === 0 ? (
                     <p className="text-sm text-slate-500 text-center py-8">No delegation history yet</p>
                   ) : (
@@ -404,80 +397,99 @@ export default function Home() {
                       ))}
                     </div>
                   )}
-                </ScrollArea>
-              </CardContent>
-            </Card>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Settings Modal */}
-      <Dialog open={showSettings} onOpenChange={setShowSettings}>
-        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle>Settings</DialogTitle>
-          </DialogHeader>
-
-          <div className="space-y-6 py-4">
-            {/* Keyword Configuration */}
-            <div className="space-y-3">
-              <Label className="text-base font-semibold">Keyword Configuration</Label>
-              <p className="text-sm text-slate-500">
-                Add keywords to monitor for delegation triggers in emails
-              </p>
-              <div className="flex gap-2">
-                <Input
-                  placeholder="Enter keyword..."
-                  value={newKeyword}
-                  onChange={(e) => setNewKeyword(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && addKeyword()}
-                />
-                <Button onClick={addKeyword} size="sm">
-                  <FaPlus className="mr-2" />
-                  Add
-                </Button>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {settings.keywords.map((keyword) => (
-                  <Badge key={keyword} variant="secondary" className="px-3 py-2 text-sm">
-                    {keyword}
-                    <button
-                      onClick={() => removeKeyword(keyword)}
-                      className="ml-2 hover:text-red-600"
-                    >
-                      <FaTimes size={12} />
-                    </button>
-                  </Badge>
-                ))}
-              </div>
+      {showSettings && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+            <div className="border-b border-slate-200 px-6 py-4 flex items-center justify-between sticky top-0 bg-white">
+              <h2 className="text-xl font-semibold text-slate-800">Settings</h2>
+              <button
+                onClick={() => setShowSettings(false)}
+                className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
+              >
+                <FaTimes className="text-slate-600" />
+              </button>
             </div>
 
-            {/* Teammate Mapping */}
-            <div className="space-y-3">
-              <Label className="text-base font-semibold">Teammate Mapping</Label>
-              <p className="text-sm text-slate-500">
-                Map email mentions to Slack handles for notifications
-              </p>
-              <div className="grid grid-cols-2 gap-2">
-                <Input
-                  placeholder="Name (e.g., John)"
-                  value={newTeammate.name}
-                  onChange={(e) =>
-                    setNewTeammate((prev) => ({ ...prev, name: e.target.value }))
-                  }
-                />
-                <Input
-                  placeholder="Slack handle (e.g., @john.smith)"
-                  value={newTeammate.slackHandle}
-                  onChange={(e) =>
-                    setNewTeammate((prev) => ({ ...prev, slackHandle: e.target.value }))
-                  }
-                />
+            <div className="px-6 py-4 space-y-6">
+              {/* Keyword Configuration */}
+              <div className="space-y-3">
+                <label className="text-base font-semibold text-slate-800 block">Keyword Configuration</label>
+                <p className="text-sm text-slate-500">
+                  Add keywords to monitor for delegation triggers in emails
+                </p>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    placeholder="Enter keyword..."
+                    value={newKeyword}
+                    onChange={(e) => setNewKeyword(e.target.value)}
+                    onKeyPress={(e) => e.key === 'Enter' && addKeyword()}
+                    className="flex-1 px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                  <button
+                    onClick={addKeyword}
+                    className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  >
+                    <FaPlus />
+                    Add
+                  </button>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {settings.keywords.map((keyword) => (
+                    <span key={keyword} className="flex items-center gap-2 px-3 py-2 bg-slate-100 text-slate-700 rounded-md text-sm font-medium">
+                      {keyword}
+                      <button
+                        onClick={() => removeKeyword(keyword)}
+                        className="hover:text-red-600"
+                      >
+                        <FaTimes size={12} />
+                      </button>
+                    </span>
+                  ))}
+                </div>
               </div>
-              <Button onClick={addTeammate} size="sm" className="w-full">
-                <FaPlus className="mr-2" />
-                Add Teammate
-              </Button>
+
+              {/* Teammate Mapping */}
+              <div className="space-y-3">
+                <label className="text-base font-semibold text-slate-800 block">Teammate Mapping</label>
+                <p className="text-sm text-slate-500">
+                  Map email mentions to Slack handles for notifications
+                </p>
+                <div className="grid grid-cols-2 gap-2">
+                  <input
+                    type="text"
+                    placeholder="Name (e.g., John)"
+                    value={newTeammate.name}
+                    onChange={(e) =>
+                      setNewTeammate((prev) => ({ ...prev, name: e.target.value }))
+                    }
+                    className="px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Slack handle (e.g., @john.smith)"
+                    value={newTeammate.slackHandle}
+                    onChange={(e) =>
+                      setNewTeammate((prev) => ({ ...prev, slackHandle: e.target.value }))
+                    }
+                    className="px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                <button
+                  onClick={addTeammate}
+                  className="flex items-center justify-center gap-2 w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  <FaPlus />
+                  Add Teammate
+                </button>
               <div className="border border-slate-200 rounded-lg overflow-hidden">
                 <table className="w-full">
                   <thead className="bg-slate-50">
@@ -506,15 +518,19 @@ export default function Home() {
                 </table>
               </div>
             </div>
-          </div>
+              </div>
 
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setShowSettings(false)}>
-              Close
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+            <div className="border-t border-slate-200 px-6 py-4 flex justify-end sticky bottom-0 bg-white">
+              <button
+                onClick={() => setShowSettings(false)}
+                className="px-6 py-2 border border-slate-300 rounded-lg hover:bg-slate-100 transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
